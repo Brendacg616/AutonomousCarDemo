@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libCrossingDetection.so -o libCrossingDetection.so CMakeFiles/CrossingDetection.dir/include/CrossingDetection.cpp.o 

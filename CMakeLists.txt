@@ -13,6 +13,7 @@ add_library(ImageProcessing SHARED
 add_library(LocalMaximaDetection SHARED
         include/LocalMaximaDetection.h
         include/LocalMaximaDetection.cpp)
+add_library(CrossingDetection SHARED include/CrossingDetection.cpp include/CrossingDetection.h)
 
 find_package(OpenCV)
 if(OpenCV_FOUND)
@@ -28,4 +29,4 @@ find_package(gflags REQUIRED)
 add_executable(AutomodelCar
         src/AutomodelCarDemo.cpp
         src/AutomodelCarDemo.hpp )
-target_link_libraries(AutomodelCar ${gflags_LIBRARIES} ${OpenCV_LIBRARIES} ImageProcessing)
+target_link_libraries(AutomodelCar ${gflags_LIBRARIES} ${OpenCV_LIBRARIES} ImageProcessing CrossingDetection LocalMaximaDetection)

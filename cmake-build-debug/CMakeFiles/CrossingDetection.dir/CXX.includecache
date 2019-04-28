@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/LocalMaximaDetection.h
+vector
+-
+
+/home/brendacg616/AutomodelCar/include/CrossingDetection.cpp
+CrossingDetection.h
+/home/brendacg616/AutomodelCar/include/CrossingDetection.h
+opencv2/opencv.hpp
+-
+
+/home/brendacg616/AutomodelCar/include/CrossingDetection.h
+LocalMaximaDetection.h
+-
+opencv2/opencv.hpp
+-
+math.h
+-
+numeric
+-
+

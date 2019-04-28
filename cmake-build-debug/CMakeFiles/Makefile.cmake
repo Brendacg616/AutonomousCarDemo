@@ -57,6 +57,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/AutomodelCar.dir/DependInfo.cmake"
+  "CMakeFiles/CrossingDetection.dir/DependInfo.cmake"
   "CMakeFiles/ImageProcessing.dir/DependInfo.cmake"
   "CMakeFiles/LocalMaximaDetection.dir/DependInfo.cmake"
   )

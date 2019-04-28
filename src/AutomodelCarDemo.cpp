@@ -3,7 +3,8 @@
 #include <iostream>
 #include <chrono>
 #include <image_processing.h>
-#include <LocalMaximaDetection.h>
+#include <CrossingDetection.h>
+
 #define OPENCV_WINDOW "Display Window"
 
 bool ParseAndCheckCommandLine(int argc, char *argv[]) {
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
         cv::VideoCapture cap;
 
         ImageProcessing ip;
+        CrossingDetection cd;
         const bool isCamera = FLAGS_i == "cam";
         if (!(FLAGS_i == "cam" ? cap.open(0) : cap.open(FLAGS_i))) {
             throw std::logic_error("Cannot open input file or camera: " + FLAGS_i);
@@ -56,11 +58,9 @@ int main(int argc, char *argv[]) {
             cap.grab();
             cv::imshow(OPENCV_WINDOW, frame);
             cv::waitKey(30);
-            std::cout<<"Displaying Image"<<std::endl;
 
-            ip.process(frame);
-            std::cout<<"Image Displayed"<<std::endl;
-
+            cv::Mat processedImage = ip.process(frame);
+            cv::Mat crossingDetectionImage = cd.detection(processedImage);
             // end of file, for single frame file, like image we just keep it displayed to let user check what was shown
             cv::Mat newFrame;
             if (!cap.retrieve(newFrame)) {

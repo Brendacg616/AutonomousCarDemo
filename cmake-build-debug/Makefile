@@ -124,6 +124,19 @@ AutomodelCar/fast:
 .PHONY : AutomodelCar/fast
 
 #=============================================================================
+# Target rules for targets named CrossingDetection
+
+# Build rule for target.
+CrossingDetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CrossingDetection
+.PHONY : CrossingDetection
+
+# fast build rule for target.
+CrossingDetection/fast:
+	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/build
+.PHONY : CrossingDetection/fast
+
+#=============================================================================
 # Target rules for targets named ImageProcessing
 
 # Build rule for target.
@@ -148,6 +161,33 @@ LocalMaximaDetection: cmake_check_build_system
 LocalMaximaDetection/fast:
 	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/build
 .PHONY : LocalMaximaDetection/fast
+
+include/CrossingDetection.o: include/CrossingDetection.cpp.o
+
+.PHONY : include/CrossingDetection.o
+
+# target to build an object file
+include/CrossingDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/include/CrossingDetection.cpp.o
+.PHONY : include/CrossingDetection.cpp.o
+
+include/CrossingDetection.i: include/CrossingDetection.cpp.i
+
+.PHONY : include/CrossingDetection.i
+
+# target to preprocess a source file
+include/CrossingDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/include/CrossingDetection.cpp.i
+.PHONY : include/CrossingDetection.cpp.i
+
+include/CrossingDetection.s: include/CrossingDetection.cpp.s
+
+.PHONY : include/CrossingDetection.s
+
+# target to generate assembly for a file
+include/CrossingDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/include/CrossingDetection.cpp.s
+.PHONY : include/CrossingDetection.cpp.s
 
 include/LocalMaximaDetection.o: include/LocalMaximaDetection.cpp.o
 
@@ -238,9 +278,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... AutomodelCar"
+	@echo "... CrossingDetection"
 	@echo "... rebuild_cache"
 	@echo "... ImageProcessing"
 	@echo "... LocalMaximaDetection"
+	@echo "... include/CrossingDetection.o"
+	@echo "... include/CrossingDetection.i"
+	@echo "... include/CrossingDetection.s"
 	@echo "... include/LocalMaximaDetection.o"
 	@echo "... include/LocalMaximaDetection.i"
 	@echo "... include/LocalMaximaDetection.s"
