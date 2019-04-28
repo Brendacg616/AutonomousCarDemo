@@ -3,6 +3,7 @@
 
 CMakeFiles/AutomodelCar.dir/src/AutomodelCarDemo.cpp.o
  ../include/CrossingDetection.h
+ ../include/LaneDetection.h
  ../include/LocalMaximaDetection.h
  ../include/image_processing.h
  ../src/AutomodelCarDemo.hpp

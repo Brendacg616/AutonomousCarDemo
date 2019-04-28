@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libLaneDetection.so -o libLaneDetection.so CMakeFiles/LaneDetection.dir/include/LaneDetection.cpp.o 

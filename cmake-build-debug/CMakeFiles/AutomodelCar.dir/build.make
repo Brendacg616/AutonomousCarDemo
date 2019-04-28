@@ -90,6 +90,7 @@ AutomodelCar: /usr/lib/x86_64-linux-gnu/libopencv_contrib.so.2.4.8
 AutomodelCar: libImageProcessing.so
 AutomodelCar: libCrossingDetection.so
 AutomodelCar: libLocalMaximaDetection.so
+AutomodelCar: libLaneDetection.so
 AutomodelCar: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.2.4.8
 AutomodelCar: /usr/lib/x86_64-linux-gnu/libopencv_legacy.so.2.4.8
 AutomodelCar: /usr/lib/x86_64-linux-gnu/libopencv_video.so.2.4.8

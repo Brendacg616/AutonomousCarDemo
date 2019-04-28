@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/brendacg616/AutomodelCar/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion-2019.1.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/opt/clion-2019.1.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,30 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named AutomodelCar
+# Target rules for targets named LocalMaximaDetection
 
 # Build rule for target.
-AutomodelCar: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 AutomodelCar
-.PHONY : AutomodelCar
+LocalMaximaDetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LocalMaximaDetection
+.PHONY : LocalMaximaDetection
 
 # fast build rule for target.
-AutomodelCar/fast:
-	$(MAKE) -f CMakeFiles/AutomodelCar.dir/build.make CMakeFiles/AutomodelCar.dir/build
-.PHONY : AutomodelCar/fast
-
-#=============================================================================
-# Target rules for targets named CrossingDetection
-
-# Build rule for target.
-CrossingDetection: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 CrossingDetection
-.PHONY : CrossingDetection
-
-# fast build rule for target.
-CrossingDetection/fast:
-	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/build
-.PHONY : CrossingDetection/fast
+LocalMaximaDetection/fast:
+	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/build
+.PHONY : LocalMaximaDetection/fast
 
 #=============================================================================
 # Target rules for targets named ImageProcessing
@@ -150,17 +137,43 @@ ImageProcessing/fast:
 .PHONY : ImageProcessing/fast
 
 #=============================================================================
-# Target rules for targets named LocalMaximaDetection
+# Target rules for targets named LaneDetection
 
 # Build rule for target.
-LocalMaximaDetection: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 LocalMaximaDetection
-.PHONY : LocalMaximaDetection
+LaneDetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LaneDetection
+.PHONY : LaneDetection
 
 # fast build rule for target.
-LocalMaximaDetection/fast:
-	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/build
-.PHONY : LocalMaximaDetection/fast
+LaneDetection/fast:
+	$(MAKE) -f CMakeFiles/LaneDetection.dir/build.make CMakeFiles/LaneDetection.dir/build
+.PHONY : LaneDetection/fast
+
+#=============================================================================
+# Target rules for targets named CrossingDetection
+
+# Build rule for target.
+CrossingDetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CrossingDetection
+.PHONY : CrossingDetection
+
+# fast build rule for target.
+CrossingDetection/fast:
+	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/build
+.PHONY : CrossingDetection/fast
+
+#=============================================================================
+# Target rules for targets named AutomodelCar
+
+# Build rule for target.
+AutomodelCar: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 AutomodelCar
+.PHONY : AutomodelCar
+
+# fast build rule for target.
+AutomodelCar/fast:
+	$(MAKE) -f CMakeFiles/AutomodelCar.dir/build.make CMakeFiles/AutomodelCar.dir/build
+.PHONY : AutomodelCar/fast
 
 include/CrossingDetection.o: include/CrossingDetection.cpp.o
 
@@ -188,6 +201,33 @@ include/CrossingDetection.s: include/CrossingDetection.cpp.s
 include/CrossingDetection.cpp.s:
 	$(MAKE) -f CMakeFiles/CrossingDetection.dir/build.make CMakeFiles/CrossingDetection.dir/include/CrossingDetection.cpp.s
 .PHONY : include/CrossingDetection.cpp.s
+
+include/LaneDetection.o: include/LaneDetection.cpp.o
+
+.PHONY : include/LaneDetection.o
+
+# target to build an object file
+include/LaneDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/LaneDetection.dir/build.make CMakeFiles/LaneDetection.dir/include/LaneDetection.cpp.o
+.PHONY : include/LaneDetection.cpp.o
+
+include/LaneDetection.i: include/LaneDetection.cpp.i
+
+.PHONY : include/LaneDetection.i
+
+# target to preprocess a source file
+include/LaneDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/LaneDetection.dir/build.make CMakeFiles/LaneDetection.dir/include/LaneDetection.cpp.i
+.PHONY : include/LaneDetection.cpp.i
+
+include/LaneDetection.s: include/LaneDetection.cpp.s
+
+.PHONY : include/LaneDetection.s
+
+# target to generate assembly for a file
+include/LaneDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/LaneDetection.dir/build.make CMakeFiles/LaneDetection.dir/include/LaneDetection.cpp.s
+.PHONY : include/LaneDetection.cpp.s
 
 include/LocalMaximaDetection.o: include/LocalMaximaDetection.cpp.o
 
@@ -276,15 +316,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... AutomodelCar"
-	@echo "... CrossingDetection"
+	@echo "... LocalMaximaDetection"
 	@echo "... rebuild_cache"
 	@echo "... ImageProcessing"
-	@echo "... LocalMaximaDetection"
+	@echo "... LaneDetection"
+	@echo "... CrossingDetection"
+	@echo "... AutomodelCar"
+	@echo "... edit_cache"
 	@echo "... include/CrossingDetection.o"
 	@echo "... include/CrossingDetection.i"
 	@echo "... include/CrossingDetection.s"
+	@echo "... include/LaneDetection.o"
+	@echo "... include/LaneDetection.i"
+	@echo "... include/LaneDetection.s"
 	@echo "... include/LocalMaximaDetection.o"
 	@echo "... include/LocalMaximaDetection.i"
 	@echo "... include/LocalMaximaDetection.s"

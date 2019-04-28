@@ -4,6 +4,7 @@
 #include <chrono>
 #include <image_processing.h>
 #include <CrossingDetection.h>
+#include <LaneDetection.h>
 
 #define OPENCV_WINDOW "Display Window"
 
@@ -35,6 +36,7 @@ int main(int argc, char *argv[]) {
 
         ImageProcessing ip;
         CrossingDetection cd;
+        LaneDetection ld;
         const bool isCamera = FLAGS_i == "cam";
         if (!(FLAGS_i == "cam" ? cap.open(0) : cap.open(FLAGS_i))) {
             throw std::logic_error("Cannot open input file or camera: " + FLAGS_i);
@@ -60,7 +62,8 @@ int main(int argc, char *argv[]) {
             cv::waitKey(30);
 
             cv::Mat processedImage = ip.process(frame);
-            cv::Mat crossingDetectionImage = cd.detection(processedImage);
+            cv::Mat crossingDetectionImage = cd.crossing_detection(processedImage);
+            cv::Mat laneDetectionImage = ld.lane_detection(crossingDetectionImage);
             // end of file, for single frame file, like image we just keep it displayed to let user check what was shown
             cv::Mat newFrame;
             if (!cap.retrieve(newFrame)) {

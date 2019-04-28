@@ -25,6 +25,7 @@ set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/ImageProcessing.dir/DependInfo.cmake"
   "/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/CrossingDetection.dir/DependInfo.cmake"
   "/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/LocalMaximaDetection.dir/DependInfo.cmake"
+  "/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/LaneDetection.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

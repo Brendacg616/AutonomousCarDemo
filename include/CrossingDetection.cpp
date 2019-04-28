@@ -17,9 +17,9 @@ CrossingDetection::~CrossingDetection()
 }
 
 
-cv::Mat CrossingDetection::detection(cv::Mat image)
+cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
 {
-    start_time = cv::getTickCount();
+    cd_start_time = cv::getTickCount();
     cv::Mat transposed_image;
     int image_height;
     int image_width;
@@ -36,7 +36,7 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
     image_width = image.size().width;
 
     // Image filtering
-    medianBlur(image, image, FILTER_KERNEL_SIZE);
+    medianBlur(image, image, CD_FILTER_KERNEL_SIZE);
 
     // Transposed image
     transposed_image = image.t();
@@ -44,17 +44,17 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
     // Line detection algorithm
     // Set initial conditions
     row_index = 0;
-    current_column = image_width * IMAGE_PERCENTAGE_START;
+    current_column = image_width * CD_IMAGE_PERCENTAGE_START;
 
     // Image scanning by columns
-    while (current_column < (image_width * IMAGE_PERCENTAGE_END))
+    while (current_column < (image_width * CD_IMAGE_PERCENTAGE_END))
     {
         // Prepare image column vector to scan
         image_column =
                 (std::vector<int>) transposed_image.row(current_column).colRange(0, image_height);
         // Search for local maxima
         local_maxima_found =
-                LocMax_pw(image_column, MIN_PEAK_HEIGHT, MAX_PEAK_HEIGHT, MIN_PEAK_WIDTH, MAX_PEAK_WIDTH);
+                LocMax_pw(image_column, CD_MIN_PEAK_HEIGHT, CD_MAX_PEAK_HEIGHT, CD_MIN_PEAK_WIDTH, CD_MAX_PEAK_WIDTH);
         // Local maxima validation (if found)
         if (!(local_maxima_found.empty()))
         {
@@ -64,7 +64,7 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
             found_point =
                     cv::Point(current_column, peak_location);
             // Point found validation through distance
-            if (abs(row_index - peak_location) < MAX_DIST_ALLOWED)
+            if (abs(row_index - peak_location) < CD_MAX_DIST_ALLOWED)
             {
                 // Add found point to line
                 line_points.push_back(found_point);
@@ -75,19 +75,19 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
 
             // Set the row index to he local minima found
             // (even if it does not belong to the line)
-            if (line_points.size() < MIN_LINE_POINTS)
+            if (line_points.size() < CD_MIN_LINE_POINTS)
             {
                 row_index = peak_location;
             }
 
         }
 
-        current_column += COLUMN_STEP;
+        current_column += CD_COLUMN_STEP;
 
     }
 
     // Verify the line points size
-    if (line_points.size() > LINE_POINTS_REQUIRED)
+    if (line_points.size() > CD_LINE_POINTS_REQUIRED)
     {
         // Linear regression from the line points
         cv::fitLine(line_points, line_polynom,
@@ -108,17 +108,17 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
         }
         else
         {
-            dist_to_line = NO_LINE_DIST;
+            dist_to_line = CD_NO_LINE_DIST;
         }
     }
     else
     {
-        dist_to_line = NO_LINE_DIST;
+        dist_to_line = CD_NO_LINE_DIST;
     }
 
     // Get elapsed time
-    end_time = cv::getTickCount();
-    elapsed_time = (end_time - start_time) / cv::getTickFrequency();
+    cd_end_time = cv::getTickCount();
+    cd_elapsed_time = (cd_end_time - cd_start_time) / cv::getTickFrequency();
 
     // Print debug information
 
@@ -137,7 +137,7 @@ cv::Mat CrossingDetection::detection(cv::Mat image)
     }
 
     // Print the line polynom paramtrization
-    if (dist_to_line != NO_LINE_DIST)
+    if (dist_to_line != CD_NO_LINE_DIST)
     {
         cv::line(
                 image,
