@@ -33,8 +33,6 @@ opencv2/opencv.hpp
 ../src/AutomodelCarDemo.hpp
 string
 -
-vector
--
 gflags/gflags.h
 -
 iostream

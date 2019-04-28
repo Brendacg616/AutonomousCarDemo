@@ -1,5 +1,6 @@
 //
-// Created by brendacg616 on 27/04/19.
+//  Adaptation from ImageProcessing ROS node originally coded by Brenda Camacho García
+//
 //
 #pragma once
 
@@ -27,15 +28,14 @@ short int const CD_LINE_POINTS_REQUIRED = 15;
 short int const CD_MIN_LINE_POINTS = 3;
 short int const CD_MAX_DIST_ALLOWED = 7;
 
-/* Global variables initialization */
+//Global variables initialization
 short int dist_to_line = CD_NO_LINE_DIST;
 float line_angle = 0.0;
 int cd_start_time, cd_end_time;
 float cd_elapsed_time;
 
-/*
- * Transforms radians to degrees function
- */
+// Transforms radians to degrees function
+
 int ToDegrees(
         float radians)
 {

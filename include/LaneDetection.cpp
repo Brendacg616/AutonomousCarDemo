@@ -1,21 +1,11 @@
 //
-// Created by brendacg616 on 27/04/19.
+// Adaptation from LaneDetection ROS node originally coded by Esteban Rojas Hernández
 //
 
-#include "LaneDetection.h"
-//Version  13/12/17
+#include <LaneDetection.h>
 #include <ros/ros.h>
 #include <opencv2/opencv.hpp>
-#include <image_transport/image_transport.h>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <cv_bridge/cv_bridge.h>
-#include <sensor_msgs/image_encodings.h>
-#include <ros/console.h>
 #include <iostream>
-#include "std_msgs/Int16.h"
-#include "cic/Lane.h"
-#include <LocalMaximaDetection.cpp>
-#include "LaneDetection.h"
 #include <math.h>
 
 LaneDetection::LaneDetection()
@@ -64,7 +54,7 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
     // Image filtering
     medianBlur(image, image, FILTER_KERNEL_SIZE);
 
-    // Line detection algorithm
+    // Line detection algorithm, get line points from right and left road lines.
     LineDetection(
             image,
             image_height,
@@ -73,10 +63,11 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
             right_line_points,
             left_line_points);
 
-    // Curvature degree calculation
+    // Linear regression calculation from the points found
     line_found = false;
     right_line_found = false;
     left_line_found = false;
+    //Linear regression for right points
     if (right_line_points.size() > MIN_RIGHT_LINE_POINTS)
     {
         cv::fitLine(
@@ -85,6 +76,7 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
         line_found = true;
         right_line_found = true;
     }
+    //Linear regression for right points
     else if (left_line_points.size() > MIN_LEFT_LINE_POINTS)
     {
         cv::fitLine(
@@ -109,11 +101,6 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
             p4 = right_line_points.back().y;
         }
 
-        float m1 = p4 - p2;
-        float m2 = p3 - p1;
-        float m = (m2 / m1);
-
-        curvature_degree = SERVO_CENTER + int(atan(m) * (180.0 / M_PI));
 
 
         // Draw cord line

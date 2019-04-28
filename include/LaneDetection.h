@@ -1,6 +1,7 @@
 //
-// Created by brendacg616 on 27/04/19.
+// Adaptation from LaneDetection ROS node originally coded by Esteban Rojas Hernández
 //
+
 #pragma once
 
 #ifndef AUTOMODELCAR_LANEDETECTION_H
@@ -50,100 +51,6 @@ int curvature_degree = SERVO_CENTER;
 int last_center_deviation = 0;
 int start_time, end_time;
 float elapsed_time;
-
-
-/*
- * Calculates the servo PWM accordingly to the center_deviation,
- * the curvature degree and the last center deviation using a PD
- * control.
- */
-int CalculateServoPWM(
-        int curvature_degree,
-        int center_deviation,
-        int last_center_deviation)
-{
-    int pe;
-    int pp;
-    int output;
-
-    if (curvature_degree>110 || curvature_degree<90)
-    {
-        pe = 1.3;
-        pp = 1.1;
-    }
-    else
-    {
-        pe = 0.45;
-        pp = 1;
-    }
-
-    output =
-            center_deviation * pe +
-            curvature_degree * pp +
-            (center_deviation - last_center_deviation) * 1;
-
-    return output;
-}
-
-/*
- * Saturates the servo PWM value accordingly to the
- * servo limits.
- */
-int ServoSaturation(
-        int calculated_servo_PWM,
-        int current_steering_PWM)
-{
-
-    if (calculated_servo_PWM > current_steering_PWM + SERVO_STEP)
-    {
-        current_steering_PWM += SERVO_STEP;
-    }
-    else if (calculated_servo_PWM < current_steering_PWM - SERVO_STEP)
-    {
-        current_steering_PWM -= SERVO_STEP;
-    }
-
-    if (current_steering_PWM > MAX_STEERING_ANGLE_RIGHT)
-    {
-        current_steering_PWM = MAX_STEERING_ANGLE_RIGHT;
-    }
-    else if (current_steering_PWM < MAX_STEERING_ANGLE_LEFT)
-    {
-        current_steering_PWM = MAX_STEERING_ANGLE_LEFT;
-    }
-
-
-    return current_steering_PWM;
-}
-
-/*
-  * Calculates the speed PWM value accordingly to the
-  * steering values.
-  */
-int CalculateSpeedPWM(
-        int current_steering_PWM,
-        int current_speed_PWM)
-{
-    float tmp;
-    int calculated_PWM;
-
-    // Calculate the PWM speed value (lineal function)
-    tmp =
-            abs((SERVO_CENTER - current_steering_PWM) * MULTIPLY_FACTOR);
-
-    calculated_PWM = int(STEERING_SPEED_RATIO * tmp) + MAX_VEL;
-
-    if (calculated_PWM > (current_speed_PWM + SPEED_INCREASE_STEP))
-    {
-        current_speed_PWM += SPEED_DECREASE_STEP;
-    }
-    else if (calculated_PWM < (current_speed_PWM + SPEED_INCREASE_STEP))
-    {
-        current_speed_PWM -= SPEED_INCREASE_STEP;
-    }
-
-    return current_speed_PWM;
-}
 
 /*
  * Validates the local maxima found through
@@ -302,34 +209,33 @@ void LineDetection(
         current_row -= ROW_STEP;
     }
 
-    if(DEBUG)
-    {
-        // Draw lines begin
-        cv::circle(
-                image, cv::Point(left_line_points.front()),
-                3, 55, -1);
-        cv::circle(
-                image, cv::Point(right_line_points.front()),
-                3, 255, -1);
 
-        // Draw lane centers
-        for (std::vector<cv::Point>::iterator point =
-                lane_centers.begin() ;
-             point != lane_centers.end(); ++point)
-            cv::circle(image, *point, 1, 155, -1);
+    // Draw lines begin
+    cv::circle(
+            image, cv::Point(left_line_points.front()),
+            3, 55, -1);
+    cv::circle(
+            image, cv::Point(right_line_points.front()),
+            3, 255, -1);
 
-        // Draw right line points
-        for (std::vector<cv::Point>::iterator point =
-                right_line_points.begin() ;
-             point != right_line_points.end(); ++point)
-            cv::circle(image, *point, 1, 250, -1);
+    // Draw lane centers
+    for (std::vector<cv::Point>::iterator point =
+            lane_centers.begin() ;
+         point != lane_centers.end(); ++point)
+        cv::circle(image, *point, 1, 155, -1);
 
-        // Draw left line points
-        for (std::vector<cv::Point>::iterator point =
-                left_line_points.begin() ;
-             point != left_line_points.end(); ++point)
-            cv::circle(image, *point, 1, 50, -1);
-    }
+    // Draw right line points
+    for (std::vector<cv::Point>::iterator point =
+            right_line_points.begin() ;
+         point != right_line_points.end(); ++point)
+        cv::circle(image, *point, 1, 250, -1);
+
+    // Draw left line points
+    for (std::vector<cv::Point>::iterator point =
+            left_line_points.begin() ;
+         point != left_line_points.end(); ++point)
+        cv::circle(image, *point, 1, 50, -1);
+
 }
 
 class LaneDetection {

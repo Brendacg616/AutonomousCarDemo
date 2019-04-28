@@ -1,5 +1,6 @@
 //
-// Created by brendacg616 on 27/04/19.
+//  Adaptation from ImageProcessing ROS node originally coded by Brenda Camacho García
+//
 //
 
 #include "CrossingDetection.h"
@@ -28,10 +29,10 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     std::vector<int> image_column, local_maxima_found;
     std::vector<cv::Point>  line_points;
     cv::Point found_point;
-    cv::Vec4f line_polynom;
+    cv::Vec4f regression_line;
     float calculated_angle;
 
-    // Image allocator and shape extraction
+    // Image shape extraction
     image_height = image.size().height;
     image_width = image.size().width;
 
@@ -90,13 +91,13 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     if (line_points.size() > CD_LINE_POINTS_REQUIRED)
     {
         // Linear regression from the line points
-        cv::fitLine(line_points, line_polynom,
+        cv::fitLine(line_points, regression_line,
                     CV_DIST_L1, 0, 0.01, 0.01);
 
         // Get the line angle form the line polynom
         calculated_angle =
                 ToDegrees(
-                        atan(line_polynom[1]/line_polynom[0]));
+                        atan(regression_line[1]/regression_line[0]));
 
         // Validation of the line by the angle
         if ((calculated_angle > -15.0) && (calculated_angle < 15.0))
@@ -104,7 +105,7 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
             // Set the line attributes
             line_angle = calculated_angle;
             dist_to_line =
-                    (image_height - line_polynom[3]) / PIXEL_CM_RATIO_Y;
+                    (image_height - regression_line[3]) / PIXEL_CM_RATIO_Y;
         }
         else
         {
@@ -120,7 +121,6 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     cd_end_time = cv::getTickCount();
     cd_elapsed_time = (cd_end_time - cd_start_time) / cv::getTickFrequency();
 
-    // Print debug information
 
     // Print line points
     if (!(line_points.empty()))
@@ -136,17 +136,17 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
             cv::circle(image, *point, 1, 255, -1);
     }
 
-    // Print the line polynom paramtrization
+    // Draw linear regression line
     if (dist_to_line != CD_NO_LINE_DIST)
     {
         cv::line(
                 image,
-                cv::Point(line_polynom[2], line_polynom[3]),
-                cv::Point(line_polynom[2] + line_polynom[0]*50, line_polynom[3] + line_polynom[1]*50),
+                cv::Point(regression_line[2], regression_line[3]),
+                cv::Point(regression_line[2] + regression_line[0]*50, regression_line[3] + regression_line[1]*50),
                 0);
         cv::circle(
                 image,
-                cv::Point(line_polynom[2], line_polynom[3]),
+                cv::Point(regression_line[2], regression_line[3]),
                 1,0,-1);
     }
 

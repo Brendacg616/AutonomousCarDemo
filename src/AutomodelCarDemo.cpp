@@ -1,3 +1,10 @@
+//  AutomodelCar Demo
+//  This project shows the image processing implemented to detect the Lane and Crossing Lines of a road
+//  It is a demo based on the ROS project AutomodelCar: https://github.com/Conilo/automodelcar-cic-ipn.git
+//  The algorithm design was developed by César Gerardo Bravo Conejo
+//  The original C++ ROS nodes were coded by Esteban Iván Rojas Hernandéz and Brenda Camacho García
+
+
 #include <opencv2/opencv.hpp>
 #include <AutomodelCarDemo.hpp>
 #include <iostream>
@@ -8,69 +15,51 @@
 
 #define OPENCV_WINDOW "Display Window"
 
-bool ParseAndCheckCommandLine(int argc, char *argv[]) {
-    // ---------------------------Parsing and validation of input args--------------------------------------
-    gflags::ParseCommandLineNonHelpFlags(&argc, &argv, true);
-    if (FLAGS_h) {
-        showUsage();
-        return false;
-    }
-    std::cout << "Parsing input parameters" << std::endl;
 
-    if (FLAGS_i.empty()) {
-        throw std::logic_error("Parameter -i is not set");
-    }
-
-    return true;
-}
 int main(int argc, char *argv[]) {
     try {
-        // ---------------------------Parsing and validation of input args--------------------------------------
+        /** Parameter Validation and initializations*/
+        // Parsing and validation of input args
         if (!ParseAndCheckCommandLine(argc, argv)) {
             return 0;
         }
 
-        // -----------------------------Read input -----------------------------------------------------
+        // Read input
         std::cout<< "Reading input" << std::endl;
         cv::VideoCapture cap;
-
+        //
         ImageProcessing ip;
         CrossingDetection cd;
         LaneDetection ld;
+        //Open camera or video file (-i parameter)
         const bool isCamera = FLAGS_i == "cam";
-        if (!(FLAGS_i == "cam" ? cap.open(0) : cap.open(FLAGS_i))) {
+        if (!(isCamera ? cap.open(0) : cap.open(FLAGS_i))) {
             throw std::logic_error("Cannot open input file or camera: " + FLAGS_i);
         }
-        const size_t width  = (size_t) cap.get(CV_CAP_PROP_FRAME_WIDTH);
-        const size_t height = (size_t) cap.get(CV_CAP_PROP_FRAME_HEIGHT);
-
-
-        // read input (video) frame
+        // Read and save input (video) frame
         cv::Mat frame;
         if (!cap.read(frame)) {
             throw std::logic_error("Failed to get frame from cv::VideoCapture");
         }
-        std::cout<<"Width: "<< frame.size().width<<std::endl;
-        std::cout<<"Height: "<< frame.size().height<<std::endl;
-        typedef std::chrono::duration<double, std::ratio<1, 1000>> ms;
-        auto wallclock = std::chrono::high_resolution_clock::now();
-        cv::namedWindow(OPENCV_WINDOW);
+        cv::namedWindow(OPENCV_WINDOW); //OpenCV Window for image display
+        /** Main Loop*/
         while (true) {
-            /** requesting new frame if any*/
-            cap.grab();
+            //Displaying video frame on OpenCV window
             cv::imshow(OPENCV_WINDOW, frame);
             cv::waitKey(30);
-
+            //Start image processing
             cv::Mat processedImage = ip.process(frame);
             cv::Mat crossingDetectionImage = cd.crossing_detection(processedImage);
-            cv::Mat laneDetectionImage = ld.lane_detection(crossingDetectionImage);
-            // end of file, for single frame file, like image we just keep it displayed to let user check what was shown
+            cv::Mat laneDetectionImage = ld.lane_detection(processedImage);
+            //Requesting new frame if any
+            cap.grab();
             cv::Mat newFrame;
-            if (!cap.retrieve(newFrame)) {
+            if (!cap.retrieve(newFrame)) { // if it is video's EOF breaks the loop
                 break;
             }else {
+                frame = newFrame;
             }
-            frame = newFrame;  // shallow copy
+
         }
     }
     catch (const std::exception& error) {

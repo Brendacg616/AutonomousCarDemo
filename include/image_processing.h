@@ -1,6 +1,9 @@
 //
-// Created by brendacg616 on 27/04/19.
+// Adaptation from ImageProcessing ROS node originally coded by Esteban Rojas Hernández and Brenda Camacho García
+//  In this node it's carried out the image processing in order to get a bird-eye view, gray scaled image
+//  from BGR images. The output will be used by LaneDetection and CrossingDetection classes.
 //
+
 #pragma once
 #ifndef AUTOMODELCAR_IMAGE_PROCESSING_H
 #define AUTOMODELCAR_IMAGE_PROCESSING_H
@@ -17,7 +20,6 @@
 class ImageProcessing
 {
     int p1, p2, p3, p4;
-    int pixel_cm_ratio_x, pixel_cm_ratio_y;
     float scale_x, scale_y;
 
 public:
