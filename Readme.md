@@ -28,8 +28,20 @@ Press c  then g
  
  sudo make install
 ```
-
+## Installation
+Clone the repository
+```
+git clone https://github.com/Brendacg616/AutonomousCarDemo.git
+cd  AutononomousCarDemo
+mkdir build
+cd build
+cmake ..
+cmake --build
+```
 ## Usage
+``` 
+cd build 
+```
 To display some help in the program usage, type on the terminal:
 ```
 ./AutomodelCar -h
