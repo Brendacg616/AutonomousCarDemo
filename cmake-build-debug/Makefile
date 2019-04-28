@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named AutomodelCar
+
+# Build rule for target.
+AutomodelCar: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 AutomodelCar
+.PHONY : AutomodelCar
+
+# fast build rule for target.
+AutomodelCar/fast:
+	$(MAKE) -f CMakeFiles/AutomodelCar.dir/build.make CMakeFiles/AutomodelCar.dir/build
+.PHONY : AutomodelCar/fast
+
+#=============================================================================
 # Target rules for targets named ImageProcessing
 
 # Build rule for target.
@@ -124,17 +137,44 @@ ImageProcessing/fast:
 .PHONY : ImageProcessing/fast
 
 #=============================================================================
-# Target rules for targets named AutomodelCar
+# Target rules for targets named LocalMaximaDetection
 
 # Build rule for target.
-AutomodelCar: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 AutomodelCar
-.PHONY : AutomodelCar
+LocalMaximaDetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 LocalMaximaDetection
+.PHONY : LocalMaximaDetection
 
 # fast build rule for target.
-AutomodelCar/fast:
-	$(MAKE) -f CMakeFiles/AutomodelCar.dir/build.make CMakeFiles/AutomodelCar.dir/build
-.PHONY : AutomodelCar/fast
+LocalMaximaDetection/fast:
+	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/build
+.PHONY : LocalMaximaDetection/fast
+
+include/LocalMaximaDetection.o: include/LocalMaximaDetection.cpp.o
+
+.PHONY : include/LocalMaximaDetection.o
+
+# target to build an object file
+include/LocalMaximaDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/include/LocalMaximaDetection.cpp.o
+.PHONY : include/LocalMaximaDetection.cpp.o
+
+include/LocalMaximaDetection.i: include/LocalMaximaDetection.cpp.i
+
+.PHONY : include/LocalMaximaDetection.i
+
+# target to preprocess a source file
+include/LocalMaximaDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/include/LocalMaximaDetection.cpp.i
+.PHONY : include/LocalMaximaDetection.cpp.i
+
+include/LocalMaximaDetection.s: include/LocalMaximaDetection.cpp.s
+
+.PHONY : include/LocalMaximaDetection.s
+
+# target to generate assembly for a file
+include/LocalMaximaDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/LocalMaximaDetection.dir/build.make CMakeFiles/LocalMaximaDetection.dir/include/LocalMaximaDetection.cpp.s
+.PHONY : include/LocalMaximaDetection.cpp.s
 
 include/image_processing.o: include/image_processing.cpp.o
 
@@ -197,9 +237,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... AutomodelCar"
 	@echo "... rebuild_cache"
 	@echo "... ImageProcessing"
-	@echo "... AutomodelCar"
+	@echo "... LocalMaximaDetection"
+	@echo "... include/LocalMaximaDetection.o"
+	@echo "... include/LocalMaximaDetection.i"
+	@echo "... include/LocalMaximaDetection.s"
 	@echo "... include/image_processing.o"
 	@echo "... include/image_processing.i"
 	@echo "... include/image_processing.s"

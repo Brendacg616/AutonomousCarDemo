@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libLocalMaximaDetection.so -o libLocalMaximaDetection.so CMakeFiles/LocalMaximaDetection.dir/include/LocalMaximaDetection.cpp.o 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <image_processing.h>
+#include <LocalMaximaDetection.h>
 #define OPENCV_WINDOW "Display Window"
 
 bool ParseAndCheckCommandLine(int argc, char *argv[]) {

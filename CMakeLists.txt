@@ -10,6 +10,9 @@ add_library(ImageProcessing SHARED
         include/image_processing.cpp
         include/image_processing.h
         )
+add_library(LocalMaximaDetection SHARED
+        include/LocalMaximaDetection.h
+        include/LocalMaximaDetection.cpp)
 
 find_package(OpenCV)
 if(OpenCV_FOUND)
