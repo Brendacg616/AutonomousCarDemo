@@ -15,17 +15,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="733eac2b-13e5-4ef2-a0a6-7bd4b09af20b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/include/CrossingDetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/CrossingDetection.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/CrossingDetection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/CrossingDetection.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/LaneDetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/LaneDetection.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/LaneDetection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/LaneDetection.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/LocalMaximaDetection.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/LocalMaximaDetection.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/image_processing.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/include/image_processing.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/image_processing.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/image_processing.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutomodelCarDemo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutomodelCarDemo.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutomodelCarDemo.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutomodelCarDemo.hpp" afterDir="false" />
-    </list>
+    <list default="true" id="733eac2b-13e5-4ef2-a0a6-7bd4b09af20b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/LocalMaximaDetection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2805">
-              <caret line="187" lean-forward="true" selection-start-line="187" selection-end-line="187" />
+            <state relative-caret-position="77">
+              <caret line="26" column="40" lean-forward="true" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -93,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/include/CrossingDetection.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="5" selection-end-line="3" selection-end-column="2" />
+            <state relative-caret-position="-975">
+              <caret line="1" column="86" lean-forward="true" selection-start-line="1" selection-start-column="86" selection-end-line="1" selection-end-column="86" />
               <folding>
                 <element signature="e#46#76#0" expanded="true" />
               </folding>
@@ -108,7 +98,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/CrossingDetection.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-358">
               <caret selection-end-line="3" selection-end-column="2" />
               <folding>
                 <element signature="e#141#174#0" expanded="true" />
@@ -147,10 +137,12 @@
       <find>Line</find>
       <find>locM</find>
       <find>line_polynom</find>
+      <find>nextLocalMaximaIndex</find>
     </findStrings>
     <replaceStrings>
       <replace>p1</replace>
       <replace>regression_line</replace>
+      <replace>nextLocalMaximumIndex</replace>
     </replaceStrings>
     <dirStrings>
       <dir>/usr/include/gflags</dir>
@@ -179,7 +171,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="64" />
-    <option name="y" value="-1091" />
+    <option name="y" value="-11" />
     <option name="width" value="1857" />
     <option name="height" value="1092" />
   </component>
@@ -290,15 +282,15 @@
       <workItem from="1556164938268" duration="2625000" />
       <workItem from="1556330088907" duration="1267000" />
       <workItem from="1556331905389" duration="15801000" />
-      <workItem from="1556466852653" duration="14761000" />
+      <workItem from="1556466852653" duration="15797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35950000" />
+    <option name="totallyTimeSpent" value="36986000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-1091" width="1857" height="1092" extended-state="6" />
+    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19568823" />
@@ -380,16 +372,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/CrossingDetection.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="3" selection-end-column="2" />
-          <folding>
-            <element signature="e#141#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/LaneDetection.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2012">
@@ -407,20 +389,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/CrossingDetection.cpp">
+    <entry file="file://$PROJECT_DIR$/include/LocalMaximaDetection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="5" selection-end-line="3" selection-end-column="2" />
+        <state relative-caret-position="77">
+          <caret line="26" column="40" lean-forward="true" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/CrossingDetection.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-358">
+          <caret selection-end-line="3" selection-end-column="2" />
           <folding>
-            <element signature="e#46#76#0" expanded="true" />
+            <element signature="e#141#174#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/LocalMaximaDetection.cpp">
+    <entry file="file://$PROJECT_DIR$/include/CrossingDetection.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2805">
-          <caret line="187" lean-forward="true" selection-start-line="187" selection-end-line="187" />
+        <state relative-caret-position="-975">
+          <caret line="1" column="86" lean-forward="true" selection-start-line="1" selection-start-column="86" selection-end-line="1" selection-end-column="86" />
+          <folding>
+            <element signature="e#46#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
