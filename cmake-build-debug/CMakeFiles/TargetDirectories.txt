@@ -1,0 +1,4 @@
+/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/ImageProcessing.dir
+/home/brendacg616/AutomodelCar/cmake-build-debug/CMakeFiles/AutomodelCar.dir

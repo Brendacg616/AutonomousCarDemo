@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.14)
+project(AutomodelCar)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(src)
+include_directories(include)
+
+add_library(ImageProcessing SHARED
+        include/image_processing.cpp
+        include/image_processing.h
+        )
+
+find_package(OpenCV)
+if(OpenCV_FOUND)
+    message(STATUS "OPENCV is enabled")
+    message(STATUS "OpenCV_INCLUDE_DIRS=${OpenCV_INCLUDE_DIRS}")
+    message(STATUS "OpenCV_LIBS=${OpenCV_LIBS}")
+else()
+    message(STATUS "OPENCV is disabled or not found, " ${TARGET_NAME} " skiped")
+    return()
+endif()
+find_package(gflags REQUIRED)
+
+add_executable(AutomodelCar
+        src/AutomodelCarDemo.cpp
+        src/AutomodelCarDemo.hpp )
+target_link_libraries(AutomodelCar ${gflags_LIBRARIES} ${OpenCV_LIBRARIES} ImageProcessing)

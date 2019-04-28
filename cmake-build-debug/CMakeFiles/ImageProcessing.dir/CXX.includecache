@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/image_processing.h
+opencv2/opencv.hpp
+-
+
+/home/brendacg616/AutomodelCar/include/image_processing.cpp
+image_processing.h
+-
+opencv2/opencv.hpp
+-
+

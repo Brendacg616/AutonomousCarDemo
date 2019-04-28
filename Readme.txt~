@@ -1,0 +1,4 @@
+sudo apt-get install cmake-curses-gui
+
+//gflags
+sudo apt-get install libgflags-dev

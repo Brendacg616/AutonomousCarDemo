@@ -1,0 +1,7 @@
+/opt/clion-2019.1.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/brendacg616/AutomodelCar
+-- OPENCV is enabled
+-- OpenCV_INCLUDE_DIRS=/usr/include/opencv;/usr/include
+-- OpenCV_LIBS=opencv_videostab;opencv_video;opencv_ts;opencv_superres;opencv_stitching;opencv_photo;opencv_ocl;opencv_objdetect;opencv_ml;opencv_legacy;opencv_imgproc;opencv_highgui;opencv_gpu;opencv_flann;opencv_features2d;opencv_core;opencv_contrib;opencv_calib3d
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/brendacg616/AutomodelCar/cmake-build-debug
