@@ -1,6 +1,12 @@
 //
 // Adaptation from LaneDetection ROS node originally coded by Esteban Rojas Hernández
+//  Perfoms a row based search of the lane line points.
 //
+//  The steps to perform the Lane Line Detection are the following:
+//  1. Fill the black space in both sides of the image with gray points
+//  2. Get Lane line points of both right and left sides of the image (continuous and dashed lines of the road respectively)
+//  3. Calculate linear regression of both lines points
+//  4. Display and return the image
 
 #pragma once
 

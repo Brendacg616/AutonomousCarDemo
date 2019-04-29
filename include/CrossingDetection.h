@@ -1,7 +1,17 @@
 //
-//  Adaptation from ImageProcessing ROS node originally coded by Brenda Camacho García
+//  Adaptation from CrossingDetection ROS node originally coded by Brenda Camacho García
+//  Perfoms a column based search of the crossing line points.
 //
-//
+//  The steps to perform the Crossing Line Detection are the following:
+//  1. Transpose the image (It was easier to get rows than columns)
+//  2. Iterate over the image "columns" from CD_IMAGE_PERCENTAGE_START to CD_IMAGE_PERCENTAGE_END
+//      2.1. Get the current column
+//      2.2. Find line point with LocMax_pw() function
+//      2.3. Append the found points
+//  3. Calculate linear regression of the line points
+//  4. Get the angle and the distance from the car to the line
+//  5. Display and return the image
+
 #pragma once
 
 #ifndef AUTOMODELCAR_CROSSINGDETECTION_H

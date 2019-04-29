@@ -1,6 +1,13 @@
 //
 // Adaptation from LaneDetection ROS node originally coded by Esteban Rojas Hernández
+//  Perfoms a row based search of the lane line points.
 //
+//  The steps to perform the Lane Line Detection are the following:
+//  1. Fill the black space in both sides of the image with gray points
+//  2. Get Lane line points of both right and left sides of the image (continuous and dashed lines of the road respectively)
+//  3. Calculate linear regression of both lines points
+//  4. Display and return the image
+
 
 #include <LaneDetection.h>
 #include <ros/ros.h>
@@ -38,7 +45,7 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
     // Image allocator and shape extraction
     image_height = image.size().height;
     image_width = image.size().width;
-
+////  1. Fill the black space in both sides of the image with gray points
     // Color transform used to fill black corners
     for (int i = image_height * IMAGE_PERCENTAGE; i < image_height; i++)
     {
@@ -50,10 +57,7 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
             }
         }
     }
-
-    // Image filtering
-    medianBlur(image, image, FILTER_KERNEL_SIZE);
-
+////  2. Get Lane line points of both right and left sides of the image (continuous and dashed lines of the road respectively)
     // Line detection algorithm, get line points from right and left road lines.
     LineDetection(
             image,
@@ -67,6 +71,7 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
     line_found = false;
     right_line_found = false;
     left_line_found = false;
+////  3. Calculate linear regression of both lines points
     //Linear regression for right points
     if (right_line_points.size() > MIN_RIGHT_LINE_POINTS)
     {
@@ -85,6 +90,8 @@ cv::Mat LaneDetection::lane_detection(cv::Mat image)
         line_found = true;
         left_line_found = true;
     }
+
+////  4. Display and return the image
 
     if (line_found == true) {
         center_deviation = int(image_width / 2) - lane_centers[1].x;

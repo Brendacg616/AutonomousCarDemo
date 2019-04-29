@@ -47,9 +47,11 @@ int main(int argc, char *argv[]) {
             //Displaying video frame on OpenCV window
             cv::imshow(OPENCV_WINDOW, frame);
             cv::waitKey(30);
-            //Start image processing
+            ////Start image processing
             cv::Mat processedImage = ip.process(frame);
+            ////Start Crossing Line Detection
             cv::Mat crossingDetectionImage = cd.crossing_detection(processedImage);
+            ////Start Lane Line Detection
             cv::Mat laneDetectionImage = ld.lane_detection(processedImage);
             //Requesting new frame if any
             cap.grab();

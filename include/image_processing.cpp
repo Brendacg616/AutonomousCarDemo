@@ -1,8 +1,14 @@
 //
 // Adaptation from ImageProcessing ROS node originally coded by Esteban Rojas Hernández and Brenda Camacho García
 //  In this node it's carried out the image processing in order to get a bird-eye view, gray scaled image
-//  from BGR images. The output will be used by LaneDetection and CrossingDetection classes.
+//  from BGR images. The output is used by LaneDetection and CrossingDetection classes.
 //
+//  For the image processing, were followed this steps:
+//  1. Get the region of interest of the image
+//  2. Resize the image:  narrower in x, larger in y
+//  3. Transform from BGR to Gray scale
+//  4. Perspective transformation
+//  5. Display and return processed image
 
 #include <image_processing.h>
 #include <opencv2/opencv.hpp>
@@ -20,8 +26,7 @@ ImageProcessing::ImageProcessing(){
 ImageProcessing::~ImageProcessing(){
     cv::destroyWindow("ImageProcessing");
 }
-cv::Mat ImageProcessing::process(cv::Mat image)
-{
+cv::Mat ImageProcessing::process(cv::Mat image) {
     int e1 = cv::getTickCount();
 
     // OpenCV Mat files declaration
@@ -31,18 +36,18 @@ cv::Mat ImageProcessing::process(cv::Mat image)
             lambda_image,
             wrapped_image;
 
-    // Region Of Interest cropping
-    cv::Rect ROI(0,90,640,350);
+    ////  1. Get the region of interest of the image
+    cv::Rect ROI(0, 90, 640, 350);
     croped_image = image(ROI);
 
-    // Image Resizing: narrower in x, larger in y;
+    ////  2. Resize the image:  narrower in x, larger in y
     cv::resize(croped_image, scaled_image,
                cv::Size(), scale_x, scale_y, CV_INTER_LINEAR);
 
-    // Color transform BGR -> Gray Scale
+    ////  3. Transform from BGR to Gray scale
     cv::cvtColor(scaled_image, gray_scale_image,
                  CV_BGR2GRAY);
-
+    ////  4. Perspective transformation
     // Points used for homology
     cv::Point2f image_points[4], object_points[4];
 
@@ -77,7 +82,7 @@ cv::Mat ImageProcessing::process(cv::Mat image)
     cv::warpPerspective(
             gray_scale_image, wrapped_image,
             lambda_image, gray_scale_image.size());
-
+    ////  5. Display and return processed image
     // Node execution time calculation and publication
     int e2 = cv::getTickCount();
     float t = (e2-e1) / cv::getTickFrequency();

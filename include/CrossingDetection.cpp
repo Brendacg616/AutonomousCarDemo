@@ -1,7 +1,16 @@
 //
-//  Adaptation from ImageProcessing ROS node originally coded by Brenda Camacho García
+//  Adaptation from CrossingDetection ROS node originally coded by Brenda Camacho García
+//  Perfoms a column based search of the crossing line points.
 //
-//
+//  The steps to perform the Crossing Line Detection are the following:
+//  1. Transpose the image (It was easier to get rows than columns)
+//  2. Iterate over the image "columns" from CD_IMAGE_PERCENTAGE_START to CD_IMAGE_PERCENTAGE_END
+//      2.1. Get the current column
+//      2.2. Find line point with LocMax_pw() function
+//      2.3. Append the found points
+//  3. Calculate linear regression of the line points
+//  4. Get the angle and the distance from the car to the line
+//  5. Display and return the image
 
 #include "CrossingDetection.h"
 #include <opencv2/opencv.hpp>
@@ -35,9 +44,7 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     // Image shape extraction
     image_height = image.size().height;
     image_width = image.size().width;
-
-    // Image filtering
-    medianBlur(image, image, CD_FILTER_KERNEL_SIZE);
+////  1. Transpose the image (It was easier to get rows than columns)
 
     // Transposed image
     transposed_image = image.t();
@@ -46,16 +53,19 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     // Set initial conditions
     row_index = 0;
     current_column = image_width * CD_IMAGE_PERCENTAGE_START;
+////  2. Iterate over the image "columns" from CD_IMAGE_PERCENTAGE_START to CD_IMAGE_PERCENTAGE_END
 
-    // Image scanning by columns
     while (current_column < (image_width * CD_IMAGE_PERCENTAGE_END))
     {
-        // Prepare image column vector to scan
+////      2.1. Get the current column
+
         image_column =
                 (std::vector<int>) transposed_image.row(current_column).colRange(0, image_height);
-        // Search for local maxima
+////      2.2. Find line point with LocMax_pw() function
         local_maxima_found =
-                LocMax_pw(image_column, CD_MIN_PEAK_HEIGHT, CD_MAX_PEAK_HEIGHT, CD_MIN_PEAK_WIDTH, CD_MAX_PEAK_WIDTH);
+        LocMax_pw(image_column, CD_MIN_PEAK_HEIGHT, CD_MAX_PEAK_HEIGHT, CD_MIN_PEAK_WIDTH, CD_MAX_PEAK_WIDTH);
+////      2.3. Append the found points
+
         // Local maxima validation (if found)
         if (!(local_maxima_found.empty()))
         {
@@ -86,6 +96,7 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
         current_column += CD_COLUMN_STEP;
 
     }
+////  3. Calculate linear regression of the line points
 
     // Verify the line points size
     if (line_points.size() > CD_LINE_POINTS_REQUIRED)
@@ -93,6 +104,7 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
         // Linear regression from the line points
         cv::fitLine(line_points, regression_line,
                     CV_DIST_L1, 0, 0.01, 0.01);
+////  4. Get the angle and the distance from the car to the line
 
         // Get the line angle form the line polynom
         calculated_angle =
@@ -121,7 +133,7 @@ cv::Mat CrossingDetection::crossing_detection(cv::Mat image)
     cd_end_time = cv::getTickCount();
     cd_elapsed_time = (cd_end_time - cd_start_time) / cv::getTickFrequency();
 
-
+////  5. Display and return the image
     // Print line points
     if (!(line_points.empty()))
     {
