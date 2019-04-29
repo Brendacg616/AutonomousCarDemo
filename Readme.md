@@ -53,7 +53,7 @@ Please refer to OpenCV installation guide https://docs.opencv.org/3.4.3/d7/d9f/t
 Clone the repository
 ```
 git clone https://github.com/Brendacg616/AutonomousCarDemo.git
-cd  AutononomousCarDemo
+cd  AutonomousCarDemo
 mkdir build
 cd build
 cmake ..
