@@ -13,7 +13,7 @@
 #include <CrossingDetection.h>
 #include <LaneDetection.h>
 
-#define OPENCV_WINDOW "Display Window"
+#define OPENCV_WINDOW "Input Display Window"
 
 
 int main(int argc, char *argv[]) {
