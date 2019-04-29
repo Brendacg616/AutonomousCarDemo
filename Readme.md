@@ -22,7 +22,7 @@ This project is composed for the following files:
 
 This project was built on Ubuntu 14.04, the following packages are required:
 
-  * OpenCV
+  * OpenCV (v3.4.2 minimum required)
   * CMake (v2.8 minimum required)
   * Gflags
   
