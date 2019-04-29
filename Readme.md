@@ -49,7 +49,7 @@ Press c  then g
 ### OpenCV Installation
 Please refer to OpenCV installation guide https://docs.opencv.org/3.4.3/d7/d9f/tutorial_linux_install.html
 
-## AutomodelCar Demo Installation
+## Build AutomodelCar Demo 
 Clone the repository
 ```
 git clone https://github.com/Brendacg616/AutonomousCarDemo.git
