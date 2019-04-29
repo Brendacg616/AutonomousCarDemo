@@ -23,7 +23,7 @@ add_library(LaneDetection SHARED
         include/LaneDetection.cpp
         include/LaneDetection.h)
 
-find_package(OpenCV)
+find_package(OpenCV 3.4.2 REQUIRED)
 if(OpenCV_FOUND)
     message(STATUS "OPENCV is enabled")
     message(STATUS "OpenCV_INCLUDE_DIRS=${OpenCV_INCLUDE_DIRS}")
@@ -37,4 +37,4 @@ find_package(gflags REQUIRED)
 add_executable(AutomodelCar
         src/AutomodelCarDemo.cpp
         src/AutomodelCarDemo.hpp )
-target_link_libraries(AutomodelCar ${gflags_LIBRARIES} ${OpenCV_LIBRARIES} ImageProcessing CrossingDetection LocalMaximaDetection LaneDetection)
+target_link_libraries(AutomodelCar ${gflags_LIBRARIES} ${OpenCV_LIBS} ImageProcessing CrossingDetection LocalMaximaDetection LaneDetection)
